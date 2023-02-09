@@ -199,3 +199,5 @@ process_noise_covariance: [<MATRIX>]
 initial_estimate_covariance: [<MATRIX>] 
 ```
 
+## More info
+[Link 1](https://navigation.ros.org/setup_guides/odom/setup_odom.html)
