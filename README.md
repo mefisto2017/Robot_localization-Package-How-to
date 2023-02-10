@@ -36,6 +36,7 @@ This node will create a TF between the map link and the odometry link
 ```
 <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" respawn="true">
   		<rosparam file="$(find ranger_navigation)/config/ekf_se_map.yaml" command="load" />
+            <remap from="/odometry/filtered" to="<YOUR ODOM TOPIC>" />
   	</node>
 ```
 
@@ -127,7 +128,7 @@ initial_estimate_covariance: [<MATRIX>]
 ## Odom to Base_link Node
 This node will create a TF between the odometry link and the base link
 ```
-<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" respawn="true">
+<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" respawn="true">
   		<rosparam file="$(find ranger_navigation)/config/ekf_se_odom.yaml" command="load" />
   	</node>
 ```
