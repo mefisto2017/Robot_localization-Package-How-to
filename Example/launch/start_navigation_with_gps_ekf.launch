@@ -3,25 +3,20 @@
 <launch>
 
 	<!-- Run the map server -->
-	<node name="map_server" pkg="map_server" type="map_server" args="$(find gps_navigation)/maps/mymap_empty.yaml" />
+	<node name="map_server" pkg="map_server" type="map_server" args="$(find ranger_navigation)/maps/mymap_empty.yaml" />
 
-	<!-- Run the ekf for odom to base_link config -->
-  	<!-- <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" respawn="true">
-  		<rosparam file="$(find ranger_navigation)/config/ekf_se_odom.yaml" command="load" />
-  	</node>-->
-
-  	 <!-- Run the ekf for map to odom config -->
+  	<!-- Run the ekf for map to odom config -->
   	<node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_map" respawn="true">
-  		<rosparam file="$(find ranger_navigation)/config/ekf_se_map.yaml" command="load" />
-  		<remap from="/odometry/filtered" to="/four_wheel_steering_controller/odom" />
+  		<rosparam file="$(find ranger_navigation)/config/real/ekf_se_map.yaml" command="load" />
+  		
   	</node>
 
 	<!-- Transform the GPS latitude and longitude to XY coordinates-->
   	<node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" clear_params="true" respawn="true">
-  		<rosparam file="$(find ranger_navigation)/config/navsat.yaml" command="load" />		
+  		<rosparam file="$(find ranger_navigation)/config/real/navsat.yaml" command="load" />		
     	<remap from="/imu/data" to="/imu/data" />
     	<remap from="/gps/fix" to="/fix" />	
-    	<remap from="/odometry/filtered" to="/four_wheel_steering_controller/odom" />
+    	<remap from="/odometry/filtered" to="/odometry/filtered" />
   	</node>
 
 </launch>
